@@ -87,7 +87,7 @@
                 <div class="h-8 mx-2 w-[1px] bg-stone-300"></div>
                 <span class="text-3xl font-serif italic text-[#FF9F66]">C</span>
             </div>
-            <button onclick="toggleMobileMenu(false)"><div class="icon-container-xl text-stone-900"><i data-lucide="x" class="lucide-icon"></i></div></button>
+            <button onclick="toggleMobileMenu(false)"><div class="icon-container-xl text-stone-900"><i data-lucide="x"></i></div></button>
         </div>
         <div class="space-y-6 sm:space-y-8 text-2xl sm:text-3xl font-serif text-left uppercase">
             <a href="#collections" onclick="toggleMobileMenu(false)" class="block border-b border-stone-100 pb-4">Collections</a>
@@ -292,7 +292,6 @@
     <div id="product-modal" class="fixed inset-0 z-[120] hidden items-center justify-center p-0 sm:p-10 overflow-hidden uppercase">
         <div class="absolute inset-0 bg-black/95 backdrop-blur-md" onclick="closeProductModal()"></div>
         
-        <!-- Mobile optimized container: h-screen on mobile, auto on desktop -->
         <div class="bg-white w-full h-screen sm:h-auto sm:max-w-6xl sm:max-h-[90vh] relative z-20 flex flex-col md:flex-row shadow-2xl animate-in zoom-in duration-500 overflow-hidden">
             
             <button class="absolute top-4 right-4 z-40 p-2 sm:p-3 bg-white/90 rounded-full shadow-lg" onclick="closeProductModal()"><div class="icon-container-md text-stone-900"><i data-lucide="x" class="lucide-icon"></i></div></button>
@@ -309,9 +308,6 @@
                     <!-- Image Counter -->
                     <div id="img-counter" class="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 text-[10px] tracking-widest rounded-full font-bold z-30">1/1</div>
                 </div>
-                
-                <!-- Thumbnails (Hidden or kept tiny on mobile to save space) -->
-                <div id="modal-thumbnails" class="flex flex-wrap gap-2 mt-2 justify-center overflow-x-auto max-w-full no-scrollbar"></div>
             </div>
             
             <!-- DETAILS SECTION (Bottom on Mobile - 30vh Scrollable) -->
@@ -476,18 +472,6 @@
             
             imgEl.src = currentProductImages[currentImageIndex].trim();
             counterEl.innerText = `${currentImageIndex + 1}/${currentProductImages.length}`;
-            
-            // Update thumbnails active state
-            const thumbs = document.querySelectorAll('#modal-thumbnails > div');
-            thumbs.forEach((t, idx) => {
-                if (idx === currentImageIndex) {
-                    t.classList.add('border-[#FF9F66]');
-                    t.classList.remove('border-stone-100');
-                } else {
-                    t.classList.remove('border-[#FF9F66]');
-                    t.classList.add('border-stone-100');
-                }
-            });
         }
 
         function openProductDetail(id) {
@@ -500,7 +484,6 @@
             currentProductImages = activeProduct.image ? activeProduct.image.split(",") : [];
 
             const modal = document.getElementById('product-modal');
-            const thumbWrap = document.getElementById('modal-thumbnails');
             const colors = document.getElementById('color-selector');
 
             document.getElementById('modal-category').innerText = activeProduct.category;
@@ -521,18 +504,6 @@
 
             // Set Initial Display
             updateModalDisplay();
-            
-            // Generate Thumbnails
-            if (currentProductImages.length > 1) {
-                thumbWrap.innerHTML = currentProductImages.map((url, idx) => `
-                    <div onclick="currentImageIndex=${idx}; updateModalDisplay()" 
-                         class="w-10 h-12 sm:w-16 sm:h-20 bg-white border-2 ${idx === 0 ? 'border-[#FF9F66]' : 'border-stone-100'} cursor-pointer overflow-hidden transition-all shrink-0">
-                        <img src="${url.trim()}" class="w-full h-full object-cover" />
-                    </div>
-                `).join('');
-            } else {
-                thumbWrap.innerHTML = '';
-            }
             
             const colorList = activeProduct.color ? activeProduct.color.split(",") : ['white'];
             activeColor = colorList[0]?.trim();
