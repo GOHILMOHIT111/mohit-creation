@@ -178,7 +178,7 @@
         </div>
     </section>
 
-    <!-- Appointment -->
+    <!-- Appointment Section -->
     <section id="appointment" class="py-24 sm:py-32 bg-[#FAF9F6] border-y border-stone-100 relative scroll-mt-24 text-center">
         <div class="max-w-4xl mx-auto px-6 space-y-12">
           <div class="space-y-4 uppercase">
@@ -194,7 +194,7 @@
                <button onclick="resetBookingForm()" class="text-[10px] sm:text-xs tracking-widest text-[#FF9F66] border-b border-[#FF9F66] mt-4 uppercase font-bold text-center">Book New Slot</button>
           </div>
 
-          <form id="booking-form" onsubmit="handleConsultationSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 bg-white p-6 sm:p-16 shadow-2xl text-left border border-stone-100 uppercase font-bold">
+          <form id="booking-form" onsubmit="handleConsultationSubmit(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 bg-white p-6 sm:p-16 shadow-2xl text-left border border-stone-100 uppercase font-bold">
               <div class="space-y-2 border-b border-stone-100 pb-2">
                 <label class="text-[9px] font-bold uppercase tracking-widest text-stone-400">Full Name</label>
                 <div class="flex items-center space-x-3"><div class="icon-sm text-stone-300"><i data-lucide="user"></i></div><input required id="full_name" type="text" placeholder="Your Name" class="w-full bg-transparent outline-none text-sm py-2 uppercase" /></div>
@@ -234,17 +234,17 @@
           <h2 class="text-4xl sm:text-5xl md:text-7xl font-serif tracking-tighter italic text-stone-900 uppercase uppercase">The Flagship <br/> <span class="not-italic text-[#FF9F66]">Atelier</span></h2>
           <div class="space-y-6 sm:space-y-8 pt-6 sm:pt-10 border-t border-stone-100 text-left">
             <div class="flex items-start space-x-4 sm:space-x-6 text-left font-normal lowercase italic">
-                <div class="icon-container-md text-[#FF9F66] shrink-0"><i data-lucide="map-pin"></i></div>
+                <div class="icon-container-md text-[#FF9F66] shrink-0"><i data-lucide="map-pin" class="lucide-icon"></i></div>
                 <p class="text-stone-600 text-xs sm:text-sm leading-relaxed max-w-sm uppercase" id="address-display"></p>
             </div>
             <div class="flex items-start space-x-4 sm:space-x-6 text-left uppercase font-bold">
-                <div class="icon-container-md text-[#FF9F66] shrink-0"><i data-lucide="phone"></i></div>
+                <div class="icon-container-md text-[#FF9F66] shrink-0"><i data-lucide="phone" class="lucide-icon"></i></div>
                 <p class="text-stone-900 text-xs sm:text-sm font-bold tracking-[0.2em] uppercase" id="phone-display"></p>
             </div>
           </div>
           <button onclick="openMap()" class="bg-stone-900 text-white px-10 sm:px-14 py-4 sm:py-5 text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.5em] font-bold hover:bg-[#FF9F66] transition-all shadow-xl flex items-center space-x-4 text-center uppercase">
               <span>Get Directions</span>
-              <div class="icon-container-sm"><i data-lucide="arrow-up-right"></i></div>
+              <div class="icon-container-sm"><i data-lucide="arrow-up-right" class="lucide-icon"></i></div>
           </button>
         </div>
     </section>
@@ -387,16 +387,16 @@
                 const images = item.image ? item.image.split(",") : [];
                 const mainImg = images[0]?.trim();
                 
-                // RESPONSIVE IMAGE WRAPPER (width 100%, object-fit: cover, responsive heights)
+                // FIXED PRODUCT IMAGE RENDERING (No aspect-ratio, object-contain for full visibility)
                 return `
                     <div class="group cursor-pointer flex flex-col" onclick="openProductDetail('${item.id}')">
-                        <div class="relative mb-6 overflow-hidden w-full h-[250px] md:h-[350px] lg:h-[450px] bg-stone-50 transition-all duration-700 group-hover:shadow-2xl">
-                            <img src="${mainImg}" class="w-full h-full object-cover object-center transition-transform duration-[2s] group-hover:scale-110" loading="lazy" />
+                        <div class="relative mb-6 overflow-hidden w-full bg-white transition-all duration-700 group-hover:shadow-2xl flex items-center justify-center">
+                            <img src="${mainImg}" class="w-full h-[260px] sm:h-[300px] md:h-[350px] lg:h-[420px] object-contain bg-white transition-transform duration-[2s] group-hover:scale-105" loading="lazy" />
                             <div class="absolute top-4 left-4 bg-white/95 px-3 py-1 text-[8px] sm:text-[9px] uppercase tracking-widest font-bold text-stone-900 border-r-4 border-[#FF9F66] shadow-md uppercase">
                                 ${item.tag || 'New'}
                             </div>
                             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all flex items-center justify-center text-center">
-                                <span class="opacity-0 group-hover:opacity-100 bg-white px-6 sm:px-8 py-3 sm:py-4 text-[9px] tracking-[0.3em] font-bold uppercase translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl uppercase font-bold">View Selection</span>
+                                <span class="opacity-0 group-hover:opacity-100 bg-white px-6 sm:px-8 py-3 sm:py-4 text-[9px] tracking-[0.3em] font-bold uppercase translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl font-bold uppercase">View Selection</span>
                             </div>
                         </div>
                         <div class="flex justify-between items-start px-2 text-left uppercase font-bold">
@@ -438,8 +438,15 @@
             document.getElementById('modal-title').innerText = activeProduct.name;
             document.getElementById('modal-price').innerText = `₹${activeProduct.price}`;
             document.getElementById('modal-description').innerText = `"${activeProduct.description}"`;
+            
             const images = activeProduct.image ? activeProduct.image.split(",") : [];
-            grid.innerHTML = images.map(url => `<img src="${url.trim()}" class="w-full object-cover" />`).join('');
+            // Modal images also using object-contain for full visibility
+            grid.innerHTML = images.map(url => `
+                <div class="w-full bg-white flex items-center justify-center">
+                    <img src="${url.trim()}" class="w-full h-auto max-h-[600px] object-contain" />
+                </div>
+            `).join('');
+            
             const colorList = activeProduct.color ? activeProduct.color.split(",") : ['white'];
             activeColor = colorList[0]?.trim();
             colors.innerHTML = colorList.map((col, idx) => `
