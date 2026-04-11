@@ -104,11 +104,11 @@
                 <div class="icon-container-sm"><i data-lucide="zap"></i></div>
                 <span class="text-[10px] sm:text-xs">Factory Outlet</span>
             </div>
-            <h1 class="text-4xl sm:text-6xl md:text-8xl font-serif text-stone-900 tracking-tighter leading-tight uppercase">Luxury <br/> <span class="italic text-[#FF9F66]">Designer Wear</span></h1>
+            <h1 class="text-4xl sm:text-6xl md:text-8xl font-serif text-stone-900 tracking-tighter leading-tight uppercase font-bold">Luxury <br/> <span class="italic text-[#FF9F66]">Designer Wear</span></h1>
             <p class="text-stone-500 text-sm sm:text-lg font-light max-w-xl italic leading-relaxed border-l-4 border-[#FF9F66]/10 pl-6 sm:pl-8 uppercase font-bold text-left">Direct factory prices. Precision AI tailoring. Tradition since 1999.</p>
             <div class="pt-4 flex flex-col sm:flex-row gap-4 sm:gap-6 uppercase tracking-widest text-[10px] font-bold">
-                <a href="#collections" class="bg-stone-900 text-white px-8 sm:px-12 py-4 sm:py-5 hover:bg-[#FF9F66] transition-all shadow-xl text-center font-bold">Explore Gallery</a>
-                <a href="#appointment" class="border border-stone-200 px-8 sm:px-12 py-4 sm:py-5 hover:border-stone-900 transition-all text-center font-bold">Book Trial</a>
+                <a href="#collections" class="bg-stone-900 text-white px-8 sm:px-12 py-4 sm:py-5 hover:bg-[#FF9F66] transition-all shadow-xl text-center">Explore Gallery</a>
+                <a href="#appointment" class="border border-stone-200 px-8 sm:px-12 py-4 sm:py-5 hover:border-stone-900 transition-all text-center">Book Trial</a>
             </div>
         </div>
     </section>
@@ -239,15 +239,15 @@
           <h2 class="text-4xl sm:text-5xl md:text-7xl font-serif tracking-tighter italic text-stone-900 uppercase uppercase font-bold">The Flagship <br/> <span class="not-italic text-[#FF9F66]">Atelier</span></h2>
           <div class="space-y-6 sm:space-y-8 pt-6 sm:pt-10 border-t border-stone-100 text-left">
             <div class="flex items-start space-x-4 sm:space-x-6 text-left font-normal lowercase italic font-bold">
-                <div class="icon-container-md text-[#FF9F66] shrink-0"><i data-lucide="map-pin"></i></div>
+                <div class="icon-container-md text-[#FF9F66] shrink-0"><i data-lucide="map-pin" class="lucide-icon"></i></div>
                 <p class="text-stone-600 text-xs sm:text-sm leading-relaxed max-w-sm uppercase" id="address-display"></p>
             </div>
             <div class="flex items-start space-x-4 sm:space-x-6 text-left uppercase font-bold">
-                <div class="icon-container-md text-[#FF9F66] shrink-0"><i data-lucide="phone"></i></div>
+                <div class="icon-container-md text-[#FF9F66] shrink-0"><i data-lucide="phone" class="lucide-icon"></i></div>
                 <p class="text-stone-900 text-xs sm:text-sm font-bold tracking-[0.2em] uppercase" id="phone-display"></p>
             </div>
           </div>
-          <button onclick="openMap()" class="bg-stone-900 text-white px-10 sm:px-14 py-4 sm:py-5 text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.5em] font-bold hover:bg-[#FF9F66] transition-all shadow-xl flex items-center space-x-4 text-center uppercase font-bold">
+          <button onclick="openMap()" class="bg-stone-900 text-white px-10 sm:px-14 py-4 sm:py-5 text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.5em] font-bold hover:bg-[#FF9F66] transition-all shadow-xl flex items-center space-x-4 text-center uppercase">
               <span>Get Directions</span>
               <div class="icon-container-sm"><i data-lucide="arrow-up-right"></i></div>
           </button>
@@ -296,8 +296,8 @@
             
             <!-- FIXED MODAL SLIDER SECTION -->
             <div id="modal-gallery" class="w-full md:w-3/5 bg-stone-50 overflow-hidden flex flex-col items-center p-4 relative">
-                <div id="modal-slider-wrap" class="w-full h-[50vh] sm:h-[60vh] relative flex items-center justify-center">
-                    <img id="modal-main-image" src="" class="w-full h-full object-contain bg-white transition-opacity duration-300" />
+                <div id="modal-slider-wrap" class="w-full flex items-center justify-center overflow-hidden relative">
+                    <img id="modal-main-image" src="" class="block max-w-full max-h-[70vh] object-contain mx-auto bg-white transition-opacity duration-300" />
                     
                     <!-- Navigation Buttons -->
                     <button onclick="prevImage()" id="prev-btn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white w-10 h-10 flex items-center justify-center rounded-full transition-all">‹</button>
@@ -542,6 +542,11 @@
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
             lucide.createIcons();
+        }
+
+        function closeModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
         }
 
         function closeProductModal() {
