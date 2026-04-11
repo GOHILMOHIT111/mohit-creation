@@ -92,7 +92,7 @@
         </div>
     </div>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section class="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-start bg-[#FDFCF8] pt-24 sm:pt-32 pb-16 sm:pb-20 px-6 md:px-24 border-b border-stone-100 text-left">
         <div class="max-w-4xl space-y-6 sm:space-y-8">
             <div class="flex items-center space-x-3 sm:space-x-4 text-[#FF9F66] uppercase tracking-[0.5em] sm:tracking-[0.8em] font-bold italic">
@@ -288,9 +288,12 @@
         <div class="absolute inset-0 bg-black/95 backdrop-blur-md" onclick="closeProductModal()"></div>
         <div class="bg-white w-full h-full sm:h-auto sm:max-w-6xl sm:max-h-[90vh] overflow-y-auto relative z-20 flex flex-col md:flex-row shadow-2xl animate-in zoom-in duration-500">
             <button class="absolute top-4 right-4 z-30 p-2 sm:p-3 bg-white/90 rounded-full shadow-lg" onclick="closeProductModal()"><div class="icon-container-md text-stone-900"><i data-lucide="x" class="lucide-icon"></i></div></button>
-            <div class="w-full md:w-3/5 bg-stone-50 overflow-y-auto max-h-[50vh] md:max-h-full no-scrollbar">
+            
+            <!-- FIXED MODAL IMAGE CONTAINER (Removed max-h restriction) -->
+            <div id="modal-gallery" class="w-full md:w-3/5 bg-stone-50 overflow-y-auto no-scrollbar">
                 <div id="modal-images-grid" class="grid grid-cols-1 gap-1"></div>
             </div>
+            
             <div class="w-full md:w-2/5 p-6 sm:p-10 flex flex-col justify-start space-y-6 text-left font-bold uppercase">
                 <div>
                     <span id="modal-category" class="text-[#FF9F66] text-[10px] font-bold uppercase tracking-[0.4em]"></span>
@@ -386,8 +389,6 @@
             container.innerHTML = items.map(item => {
                 const images = item.image ? item.image.split(",") : [];
                 const mainImg = images[0]?.trim();
-                
-                // FIXED PRODUCT IMAGE RENDERING (No aspect-ratio, object-contain for full visibility)
                 return `
                     <div class="group cursor-pointer flex flex-col" onclick="openProductDetail('${item.id}')">
                         <div class="relative mb-6 overflow-hidden w-full bg-white transition-all duration-700 group-hover:shadow-2xl flex items-center justify-center">
@@ -440,11 +441,10 @@
             document.getElementById('modal-description').innerText = `"${activeProduct.description}"`;
             
             const images = activeProduct.image ? activeProduct.image.split(",") : [];
-            // Modal images also using object-contain for full visibility
+            
+            // FIXED MODAL IMAGE CLASSES (Full visibility, no zoom, h-auto)
             grid.innerHTML = images.map(url => `
-                <div class="w-full bg-white flex items-center justify-center">
-                    <img src="${url.trim()}" class="w-full h-auto max-h-[600px] object-contain" />
-                </div>
+                <img src="${url.trim()}" class="w-full h-auto object-contain" />
             `).join('');
             
             const colorList = activeProduct.color ? activeProduct.color.split(",") : ['white'];
