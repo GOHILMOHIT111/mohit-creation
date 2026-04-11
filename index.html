@@ -289,9 +289,10 @@
         <div class="bg-white w-full h-full sm:h-auto sm:max-w-6xl sm:max-h-[90vh] overflow-y-auto relative z-20 flex flex-col md:flex-row shadow-2xl animate-in zoom-in duration-500">
             <button class="absolute top-4 right-4 z-30 p-2 sm:p-3 bg-white/90 rounded-full shadow-lg" onclick="closeProductModal()"><div class="icon-container-md text-stone-900"><i data-lucide="x" class="lucide-icon"></i></div></button>
             
-            <!-- FIXED MODAL IMAGE CONTAINER (Removed max-h restriction) -->
-            <div id="modal-gallery" class="w-full md:w-3/5 bg-stone-50 overflow-y-auto no-scrollbar">
-                <div id="modal-images-grid" class="grid grid-cols-1 gap-1"></div>
+            <!-- FIXED MODAL IMAGE CONTAINER (Showing single image with scroll behavior fixed) -->
+            <div id="modal-gallery" class="w-full md:w-3/5 bg-stone-50 overflow-y-auto no-scrollbar flex flex-col items-center p-4">
+                <div id="modal-main-image-wrap" class="w-full flex items-center justify-center"></div>
+                <div id="modal-thumbnails" class="flex flex-wrap gap-2 mt-6 justify-center"></div>
             </div>
             
             <div class="w-full md:w-2/5 p-6 sm:p-10 flex flex-col justify-start space-y-6 text-left font-bold uppercase">
@@ -427,14 +428,17 @@
             renderProducts();
         }
 
+        // --- FIXED MODAL LOGIC FOR SINGLE IMAGE & THUMBNAILS ---
         function openProductDetail(id) {
             activeProduct = allProducts.find(p => p.id === id);
             if(!activeProduct) return;
             activeSize = 'M';
             activeColor = 'Default';
             const modal = document.getElementById('product-modal');
-            const grid = document.getElementById('modal-images-grid');
+            const mainWrap = document.getElementById('modal-main-image-wrap');
+            const thumbWrap = document.getElementById('modal-thumbnails');
             const colors = document.getElementById('color-selector');
+
             document.getElementById('modal-category').innerText = activeProduct.category;
             document.getElementById('modal-title').innerText = activeProduct.name;
             document.getElementById('modal-price').innerText = `₹${activeProduct.price}`;
@@ -442,10 +446,20 @@
             
             const images = activeProduct.image ? activeProduct.image.split(",") : [];
             
-            // FIXED MODAL IMAGE CLASSES (Full visibility, no zoom, h-auto)
-            grid.innerHTML = images.map(url => `
-                <img src="${url.trim()}" class="w-full h-auto object-contain" />
-            `).join('');
+            // Set Main Image (Show only first one with 60vh height)
+            mainWrap.innerHTML = `<img id="modal-main-display" src="${images[0]?.trim()}" class="w-full h-[60vh] object-contain bg-white" />`;
+            
+            // Generate Thumbnails
+            if (images.length > 1) {
+                thumbWrap.innerHTML = images.map((url, idx) => `
+                    <div onclick="switchModalImage('${url.trim()}', this)" 
+                         class="w-12 h-16 sm:w-16 sm:h-20 bg-white border-2 ${idx === 0 ? 'border-[#FF9F66]' : 'border-stone-100'} cursor-pointer overflow-hidden transition-all">
+                        <img src="${url.trim()}" class="w-full h-full object-cover" />
+                    </div>
+                `).join('');
+            } else {
+                thumbWrap.innerHTML = '';
+            }
             
             const colorList = activeProduct.color ? activeProduct.color.split(",") : ['white'];
             activeColor = colorList[0]?.trim();
@@ -458,6 +472,21 @@
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
             lucide.createIcons();
+        }
+
+        // New function to switch images in modal
+        function switchModalImage(url, thumbEl) {
+            const mainImg = document.getElementById('modal-main-display');
+            mainImg.src = url;
+            
+            // Update thumbnail borders
+            const thumbs = document.querySelectorAll('#modal-thumbnails > div');
+            thumbs.forEach(t => {
+                t.classList.remove('border-[#FF9F66]');
+                t.classList.add('border-stone-100');
+            });
+            thumbEl.classList.add('border-[#FF9F66]');
+            thumbEl.classList.remove('border-stone-100');
         }
 
         function closeProductModal() {
@@ -486,9 +515,8 @@
         }
 
         function handleOrderSubmit() {
-            const images = activeProduct.image ? activeProduct.image.split(",") : [];
-            const mainImg = images[0]?.trim();
-            const msg = `Hello, I want to order this product.\nProduct: ${activeProduct.name}\nPrice: ₹${activeProduct.price}\nSize: ${activeSize}\nColor: ${activeColor}\nProduct Image: ${mainImg}\nMy Address: `;
+            const currentImg = document.getElementById('modal-main-display').src;
+            const msg = `Hello, I want to order this product.\nProduct: ${activeProduct.name}\nPrice: ₹${activeProduct.price}\nSize: ${activeSize}\nColor: ${activeColor}\nProduct Image: ${currentImg}\nMy Address: `;
             window.open(`https://wa.me/${CONTACT.wa}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
