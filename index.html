@@ -28,10 +28,15 @@
         .selection-bg::selection { background-color: rgba(255, 159, 102, 0.3); }
         
         .lucide { width: 24px; height: 24px; stroke-width: 2px; display: inline-block; vertical-align: middle; }
-        .icon-container-sm { width: 18px; height: 18px; display: inline-block; vertical-align: middle; }
-        .icon-container-md { width: 24px; height: 24px; display: inline-block; vertical-align: middle; }
-        .icon-container-lg { width: 28px; height: 28px; display: inline-block; vertical-align: middle; }
-        .icon-container-xl { width: 32px; height: 32px; display: inline-block; vertical-align: middle; }
+        
+        /* Fade Animation for Slider */
+        .fade-anim {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-[#FDFCF8] text-[#1a1a1a] font-sans selection-bg">
@@ -92,7 +97,7 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-start bg-[#FDFCF8] pt-24 sm:pt-32 pb-16 sm:pb-20 px-6 md:px-24 border-b border-stone-100 text-left">
         <div class="max-w-4xl space-y-6 sm:space-y-8">
             <div class="flex items-center space-x-3 sm:space-x-4 text-[#FF9F66] uppercase tracking-[0.5em] sm:tracking-[0.8em] font-bold italic">
@@ -102,8 +107,8 @@
             <h1 class="text-4xl sm:text-6xl md:text-8xl font-serif text-stone-900 tracking-tighter leading-tight uppercase">Luxury <br/> <span class="italic text-[#FF9F66]">Designer Wear</span></h1>
             <p class="text-stone-500 text-sm sm:text-lg font-light max-w-xl italic leading-relaxed border-l-4 border-[#FF9F66]/10 pl-6 sm:pl-8 uppercase font-bold text-left">Direct factory prices. Precision AI tailoring. Tradition since 1999.</p>
             <div class="pt-4 flex flex-col sm:flex-row gap-4 sm:gap-6 uppercase tracking-widest text-[10px] font-bold">
-                <a href="#collections" class="bg-stone-900 text-white px-8 sm:px-12 py-4 sm:py-5 hover:bg-[#FF9F66] transition-all shadow-xl text-center">Explore Gallery</a>
-                <a href="#appointment" class="border border-stone-200 px-8 sm:px-12 py-4 sm:py-5 hover:border-stone-900 transition-all text-center">Book Trial</a>
+                <a href="#collections" class="bg-stone-900 text-white px-8 sm:px-12 py-4 sm:py-5 hover:bg-[#FF9F66] transition-all shadow-xl text-center font-bold">Explore Gallery</a>
+                <a href="#appointment" class="border border-stone-200 px-8 sm:px-12 py-4 sm:py-5 hover:border-stone-900 transition-all text-center font-bold">Book Trial</a>
             </div>
         </div>
     </section>
@@ -112,7 +117,7 @@
     <section id="collections" class="max-w-[1800px] mx-auto px-4 sm:px-8 md:px-12 py-20 sm:py-32 bg-white scroll-mt-24 text-center">
         <div class="flex flex-col items-center mb-16 sm:mb-24 space-y-8 sm:space-y-12">
             <div class="text-center px-4">
-                <h2 class="text-4xl sm:text-5xl md:text-7xl font-serif tracking-tighter italic text-stone-900 uppercase">Signature <span class="not-italic text-[#FF9F66]">Gallery</span></h2>
+                <h2 class="text-4xl sm:text-5xl md:text-7xl font-serif tracking-tighter italic text-stone-900 uppercase font-bold">Signature <span class="not-italic text-[#FF9F66]">Gallery</span></h2>
                 <div class="h-[2px] w-16 sm:w-24 bg-[#FF9F66] mx-auto mt-4 sm:mt-6"></div>
             </div>
             <div id="category-btns" class="flex flex-wrap justify-center gap-2 sm:gap-4 text-[9px] sm:text-[10px] font-bold px-2">
@@ -144,7 +149,7 @@
                  <div class="icon-container-md"><i data-lucide="award"></i></div>
                  <span class="text-[10px] sm:text-[12px] uppercase tracking-[0.4em] sm:tracking-[0.6em] font-bold">The Mohit Creation Legacy</span>
               </div>
-              <h2 class="text-4xl sm:text-5xl md:text-8xl font-serif italic leading-none uppercase">Heritage Meets <br/> <span class="text-[#FF9F66] not-italic">Technology</span></h2>
+              <h2 class="text-4xl sm:text-5xl md:text-8xl font-serif italic leading-none uppercase font-bold">Heritage Meets <br/> <span class="text-[#FF9F66] not-italic">Technology</span></h2>
               <div>
                 <p class="text-stone-400 text-base sm:text-xl font-light italic leading-relaxed max-w-lg">
                   For over 25 years, Mohit Creation has stood as a beacon of purity and trust in Ahmedabad's fashion landscape. Our journey began in 1999 with a simple vision: to bring the richness of Indian heritage to every wardrobe. Today, we combine that tradition with advanced AI-powered machinery, ensuring every thread of our Pure Silk, Authentic Zari, and Premium Handloom fabrics meets the gold standard of precision. Every ensemble we create is a unique masterpiece, featuring modern embroidery and stylized Indian designs that speak to the modern muse while honoring our timeless legacy.
@@ -178,23 +183,23 @@
         </div>
     </section>
 
-    <!-- Appointment Section -->
+    <!-- Appointment -->
     <section id="appointment" class="py-24 sm:py-32 bg-[#FAF9F6] border-y border-stone-100 relative scroll-mt-24 text-center">
         <div class="max-w-4xl mx-auto px-6 space-y-12">
           <div class="space-y-4 uppercase">
             <span class="text-[#FF9F66] text-[10px] font-bold tracking-[0.5em] block">Exclusive Booking</span>
-            <h2 class="text-4xl sm:text-5xl md:text-7xl font-serif italic uppercase">Book a <span class="not-italic text-[#FF9F66]">Consultation</span></h2>
+            <h2 class="text-4xl sm:text-5xl md:text-7xl font-serif italic uppercase font-bold">Book a <span class="not-italic text-[#FF9F66]">Consultation</span></h2>
             <p class="text-stone-500 font-light italic text-base sm:text-lg max-w-xl mx-auto lowercase">Secure your personal slot at our flagship atelier.</p>
           </div>
 
-          <div id="booking-success" class="hidden bg-white p-8 sm:p-12 shadow-2xl rounded-sm flex flex-col items-center space-y-4 uppercase">
+          <div id="booking-success" class="hidden bg-white p-8 sm:p-12 shadow-2xl rounded-sm flex flex-col items-center space-y-4 uppercase font-bold">
                <div class="icon-container-xl text-[#FF9F66]"><i data-lucide="check-circle"></i></div>
                <h3 class="text-xl sm:text-2xl font-serif">Booking Successful!</h3>
                <p class="text-stone-500 lowercase italic text-sm sm:text-base">Your data has been saved. WhatsApp is now open for confirmation.</p>
                <button onclick="resetBookingForm()" class="text-[10px] sm:text-xs tracking-widest text-[#FF9F66] border-b border-[#FF9F66] mt-4 uppercase font-bold text-center">Book New Slot</button>
           </div>
 
-          <form id="booking-form" onsubmit="handleConsultationSubmit(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 bg-white p-6 sm:p-16 shadow-2xl text-left border border-stone-100 uppercase font-bold">
+          <form id="booking-form" onsubmit="handleConsultationSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 bg-white p-6 sm:p-16 shadow-2xl text-left border border-stone-100 uppercase font-bold">
               <div class="space-y-2 border-b border-stone-100 pb-2">
                 <label class="text-[9px] font-bold uppercase tracking-widest text-stone-400">Full Name</label>
                 <div class="flex items-center space-x-3"><div class="icon-sm text-stone-300"><i data-lucide="user"></i></div><input required id="full_name" type="text" placeholder="Your Name" class="w-full bg-transparent outline-none text-sm py-2 uppercase" /></div>
@@ -231,20 +236,20 @@
         </div>
         <div class="space-y-8 sm:space-y-10 order-1 lg:order-2">
           <span class="text-[#FF9F66] text-[10px] sm:text-[11px] font-bold tracking-[0.5em] block uppercase">Our Atelier</span>
-          <h2 class="text-4xl sm:text-5xl md:text-7xl font-serif tracking-tighter italic text-stone-900 uppercase uppercase">The Flagship <br/> <span class="not-italic text-[#FF9F66]">Atelier</span></h2>
+          <h2 class="text-4xl sm:text-5xl md:text-7xl font-serif tracking-tighter italic text-stone-900 uppercase uppercase font-bold">The Flagship <br/> <span class="not-italic text-[#FF9F66]">Atelier</span></h2>
           <div class="space-y-6 sm:space-y-8 pt-6 sm:pt-10 border-t border-stone-100 text-left">
-            <div class="flex items-start space-x-4 sm:space-x-6 text-left font-normal lowercase italic">
-                <div class="icon-container-md text-[#FF9F66] shrink-0"><i data-lucide="map-pin" class="lucide-icon"></i></div>
+            <div class="flex items-start space-x-4 sm:space-x-6 text-left font-normal lowercase italic font-bold">
+                <div class="icon-container-md text-[#FF9F66] shrink-0"><i data-lucide="map-pin"></i></div>
                 <p class="text-stone-600 text-xs sm:text-sm leading-relaxed max-w-sm uppercase" id="address-display"></p>
             </div>
             <div class="flex items-start space-x-4 sm:space-x-6 text-left uppercase font-bold">
-                <div class="icon-container-md text-[#FF9F66] shrink-0"><i data-lucide="phone" class="lucide-icon"></i></div>
+                <div class="icon-container-md text-[#FF9F66] shrink-0"><i data-lucide="phone"></i></div>
                 <p class="text-stone-900 text-xs sm:text-sm font-bold tracking-[0.2em] uppercase" id="phone-display"></p>
             </div>
           </div>
-          <button onclick="openMap()" class="bg-stone-900 text-white px-10 sm:px-14 py-4 sm:py-5 text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.5em] font-bold hover:bg-[#FF9F66] transition-all shadow-xl flex items-center space-x-4 text-center uppercase">
+          <button onclick="openMap()" class="bg-stone-900 text-white px-10 sm:px-14 py-4 sm:py-5 text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.5em] font-bold hover:bg-[#FF9F66] transition-all shadow-xl flex items-center space-x-4 text-center uppercase font-bold">
               <span>Get Directions</span>
-              <div class="icon-container-sm"><i data-lucide="arrow-up-right" class="lucide-icon"></i></div>
+              <div class="icon-container-sm"><i data-lucide="arrow-up-right"></i></div>
           </button>
         </div>
     </section>
@@ -289,24 +294,35 @@
         <div class="bg-white w-full h-full sm:h-auto sm:max-w-6xl sm:max-h-[90vh] overflow-y-auto relative z-20 flex flex-col md:flex-row shadow-2xl animate-in zoom-in duration-500">
             <button class="absolute top-4 right-4 z-30 p-2 sm:p-3 bg-white/90 rounded-full shadow-lg" onclick="closeProductModal()"><div class="icon-container-md text-stone-900"><i data-lucide="x" class="lucide-icon"></i></div></button>
             
-            <!-- FIXED MODAL IMAGE CONTAINER (Showing single image with scroll behavior fixed) -->
-            <div id="modal-gallery" class="w-full md:w-3/5 bg-stone-50 overflow-y-auto no-scrollbar flex flex-col items-center p-4">
-                <div id="modal-main-image-wrap" class="w-full flex items-center justify-center"></div>
-                <div id="modal-thumbnails" class="flex flex-wrap gap-2 mt-6 justify-center"></div>
+            <!-- FIXED MODAL SLIDER SECTION -->
+            <div id="modal-gallery" class="w-full md:w-3/5 bg-stone-50 overflow-hidden flex flex-col items-center p-4 relative">
+                <div id="modal-slider-wrap" class="w-full h-[50vh] sm:h-[60vh] relative flex items-center justify-center">
+                    <img id="modal-main-image" src="" class="w-full h-full object-contain bg-white transition-opacity duration-300" />
+                    
+                    <!-- Navigation Buttons -->
+                    <button onclick="prevImage()" id="prev-btn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white w-10 h-10 flex items-center justify-center rounded-full transition-all">‹</button>
+                    <button onclick="nextImage()" id="next-btn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white w-10 h-10 flex items-center justify-center rounded-full transition-all">›</button>
+                    
+                    <!-- Image Counter -->
+                    <div id="img-counter" class="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 text-[10px] tracking-widest rounded-full font-bold">1/1</div>
+                </div>
+                
+                <!-- Thumbnails -->
+                <div id="modal-thumbnails" class="flex flex-wrap gap-2 mt-4 justify-center"></div>
             </div>
             
             <div class="w-full md:w-2/5 p-6 sm:p-10 flex flex-col justify-start space-y-6 text-left font-bold uppercase">
                 <div>
                     <span id="modal-category" class="text-[#FF9F66] text-[10px] font-bold uppercase tracking-[0.4em]"></span>
-                    <h2 id="modal-title" class="text-2xl sm:text-4xl font-serif italic tracking-tighter leading-tight mt-2 uppercase"></h2>
+                    <h2 id="modal-title" class="text-2xl sm:text-4xl font-serif italic tracking-tighter leading-tight mt-2 uppercase font-bold"></h2>
                     <div class="flex items-center space-x-4 mt-4 uppercase">
-                        <p id="modal-price" class="text-xl sm:text-2xl font-serif text-stone-900 uppercase"></p>
+                        <p id="modal-price" class="text-xl sm:text-2xl font-serif text-stone-900 uppercase font-bold"></p>
                     </div>
                 </div>
                 <div class="h-[1px] w-full bg-stone-100"></div>
                 <div>
                     <label class="text-[10px] font-bold tracking-widest text-stone-400 mb-3 block uppercase">Select Size</label>
-                    <div id="size-selector" class="flex flex-wrap gap-2">
+                    <div id="size-selector" class="flex flex-wrap gap-2 font-bold">
                         <button onclick="selectSize('XS', this)" class="w-9 h-9 sm:w-10 sm:h-10 text-[10px] border flex items-center justify-center transition-all border-stone-200">XS</button>
                         <button onclick="selectSize('S', this)" class="w-9 h-9 sm:w-10 sm:h-10 text-[10px] border flex items-center justify-center transition-all border-stone-200">S</button>
                         <button onclick="selectSize('M', this)" class="w-9 h-9 sm:w-10 sm:h-10 text-[10px] border flex items-center justify-center transition-all bg-stone-900 text-white border-stone-900">M</button>
@@ -346,6 +362,10 @@
         let activeProduct = null;
         let activeSize = 'M';
         let activeColor = 'Default';
+
+        // Slider State
+        let currentProductImages = [];
+        let currentImageIndex = 0;
 
         window.addEventListener('load', () => {
             lucide.createIcons();
@@ -394,19 +414,19 @@
                     <div class="group cursor-pointer flex flex-col" onclick="openProductDetail('${item.id}')">
                         <div class="relative mb-6 overflow-hidden w-full bg-white transition-all duration-700 group-hover:shadow-2xl flex items-center justify-center">
                             <img src="${mainImg}" class="w-full h-[260px] sm:h-[300px] md:h-[350px] lg:h-[420px] object-contain bg-white transition-transform duration-[2s] group-hover:scale-105" loading="lazy" />
-                            <div class="absolute top-4 left-4 bg-white/95 px-3 py-1 text-[8px] sm:text-[9px] uppercase tracking-widest font-bold text-stone-900 border-r-4 border-[#FF9F66] shadow-md uppercase">
+                            <div class="absolute top-4 left-4 bg-white/95 px-3 py-1 text-[8px] sm:text-[9px] uppercase tracking-widest font-bold text-stone-900 border-r-4 border-[#FF9F66] shadow-md uppercase font-bold">
                                 ${item.tag || 'New'}
                             </div>
                             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all flex items-center justify-center text-center">
-                                <span class="opacity-0 group-hover:opacity-100 bg-white px-6 sm:px-8 py-3 sm:py-4 text-[9px] tracking-[0.3em] font-bold uppercase translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl font-bold uppercase">View Selection</span>
+                                <span class="opacity-0 group-hover:opacity-100 bg-white px-6 sm:px-8 py-3 sm:py-4 text-[9px] tracking-[0.3em] font-bold uppercase translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl font-bold uppercase font-bold">View Selection</span>
                             </div>
                         </div>
                         <div class="flex justify-between items-start px-2 text-left uppercase font-bold">
                             <div class="space-y-1">
-                                <p class="text-[#FF9F66] text-[8px] sm:text-[9px] uppercase tracking-[0.2em] sm:tracking-[0.3em] font-bold">${item.category}</p>
-                                <h3 class="text-lg sm:text-xl font-serif text-stone-800">${item.name}</h3>
+                                <p class="text-[#FF9F66] text-[8px] sm:text-[9px] uppercase tracking-[0.2em] sm:tracking-[0.3em] font-bold font-bold">${item.category}</p>
+                                <h3 class="text-lg sm:text-xl font-serif text-stone-800 font-bold">${item.name}</h3>
                             </div>
-                            <div class="text-right font-serif italic text-xl sm:text-2xl text-stone-900">₹${item.price}</div>
+                            <div class="text-right font-serif italic text-xl sm:text-2xl text-stone-900 font-bold">₹${item.price}</div>
                         </div>
                     </div>
                 `;
@@ -428,14 +448,54 @@
             renderProducts();
         }
 
-        // --- FIXED MODAL LOGIC FOR SINGLE IMAGE & THUMBNAILS ---
+        // Slider Navigation Functions
+        function nextImage() {
+            if (currentProductImages.length <= 1) return;
+            currentImageIndex = (currentImageIndex + 1) % currentProductImages.length;
+            updateModalDisplay();
+        }
+
+        function prevImage() {
+            if (currentProductImages.length <= 1) return;
+            currentImageIndex = (currentImageIndex - 1 + currentProductImages.length) % currentProductImages.length;
+            updateModalDisplay();
+        }
+
+        function updateModalDisplay() {
+            const imgEl = document.getElementById('modal-main-image');
+            const counterEl = document.getElementById('img-counter');
+            
+            // Add fade animation
+            imgEl.classList.remove('fade-anim');
+            void imgEl.offsetWidth; // Trigger reflow
+            imgEl.classList.add('fade-anim');
+            
+            imgEl.src = currentProductImages[currentImageIndex].trim();
+            counterEl.innerText = `${currentImageIndex + 1}/${currentProductImages.length}`;
+            
+            // Update thumbnails active state
+            const thumbs = document.querySelectorAll('#modal-thumbnails > div');
+            thumbs.forEach((t, idx) => {
+                if (idx === currentImageIndex) {
+                    t.classList.add('border-[#FF9F66]');
+                    t.classList.remove('border-stone-100');
+                } else {
+                    t.classList.remove('border-[#FF9F66]');
+                    t.classList.add('border-stone-100');
+                }
+            });
+        }
+
         function openProductDetail(id) {
             activeProduct = allProducts.find(p => p.id === id);
             if(!activeProduct) return;
+            
             activeSize = 'M';
             activeColor = 'Default';
+            currentImageIndex = 0;
+            currentProductImages = activeProduct.image ? activeProduct.image.split(",") : [];
+
             const modal = document.getElementById('product-modal');
-            const mainWrap = document.getElementById('modal-main-image-wrap');
             const thumbWrap = document.getElementById('modal-thumbnails');
             const colors = document.getElementById('color-selector');
 
@@ -444,15 +504,24 @@
             document.getElementById('modal-price').innerText = `₹${activeProduct.price}`;
             document.getElementById('modal-description').innerText = `"${activeProduct.description}"`;
             
-            const images = activeProduct.image ? activeProduct.image.split(",") : [];
-            
-            // Set Main Image (Show only first one with 60vh height)
-            mainWrap.innerHTML = `<img id="modal-main-display" src="${images[0]?.trim()}" class="w-full h-[60vh] object-contain bg-white" />`;
+            // Show/Hide Nav buttons based on count
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            if (currentProductImages.length <= 1) {
+                prevBtn.classList.add('hidden');
+                nextBtn.classList.add('hidden');
+            } else {
+                prevBtn.classList.remove('hidden');
+                nextBtn.classList.remove('hidden');
+            }
+
+            // Set Initial Display
+            updateModalDisplay();
             
             // Generate Thumbnails
-            if (images.length > 1) {
-                thumbWrap.innerHTML = images.map((url, idx) => `
-                    <div onclick="switchModalImage('${url.trim()}', this)" 
+            if (currentProductImages.length > 1) {
+                thumbWrap.innerHTML = currentProductImages.map((url, idx) => `
+                    <div onclick="currentImageIndex=${idx}; updateModalDisplay()" 
                          class="w-12 h-16 sm:w-16 sm:h-20 bg-white border-2 ${idx === 0 ? 'border-[#FF9F66]' : 'border-stone-100'} cursor-pointer overflow-hidden transition-all">
                         <img src="${url.trim()}" class="w-full h-full object-cover" />
                     </div>
@@ -468,25 +537,11 @@
                     class="w-8 h-8 rounded-full border-2 transition-all shadow-sm ${idx === 0 ? 'border-stone-900 scale-110' : 'border-stone-100'}" 
                     style="background-color: ${col.trim().toLowerCase()}"></button>
             `).join('');
+
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
             lucide.createIcons();
-        }
-
-        // New function to switch images in modal
-        function switchModalImage(url, thumbEl) {
-            const mainImg = document.getElementById('modal-main-display');
-            mainImg.src = url;
-            
-            // Update thumbnail borders
-            const thumbs = document.querySelectorAll('#modal-thumbnails > div');
-            thumbs.forEach(t => {
-                t.classList.remove('border-[#FF9F66]');
-                t.classList.add('border-stone-100');
-            });
-            thumbEl.classList.add('border-[#FF9F66]');
-            thumbEl.classList.remove('border-stone-100');
         }
 
         function closeProductModal() {
@@ -515,7 +570,7 @@
         }
 
         function handleOrderSubmit() {
-            const currentImg = document.getElementById('modal-main-display').src;
+            const currentImg = document.getElementById('modal-main-image').src;
             const msg = `Hello, I want to order this product.\nProduct: ${activeProduct.name}\nPrice: ₹${activeProduct.price}\nSize: ${activeSize}\nColor: ${activeColor}\nProduct Image: ${currentImg}\nMy Address: `;
             window.open(`https://wa.me/${CONTACT.wa}?text=${encodeURIComponent(msg)}`, '_blank');
         }
